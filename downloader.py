@@ -1,50 +1,49 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import json
-import telegram
-import os
+import vk_api
+import urllib.request
+import os.path
 import sys, getopt
 
-
 def main():
-    tg_token = ''
-    tg_chat_id = ''
-    owner_id = ''
-    argv = sys.argv[1:]
-
-    try:
-        opts, args = getopt.getopt(argv, "t:o:c:")
-    except:
-        print("Error")
-    for opt, arg in opts:
-        if opt in ["-t"]:
-            tg_token = arg
-        elif opt in ["-o"]:
-            owner_id = arg
-        elif opt in ["-c"]:
-            tg_chat_id = arg
-
-    image_dir = str(owner_id).lstrip('-')
-
-    file_name = str(image_dir) + '_last.txt'
-    last = open(file_name, 'a+')
-    count=0
-    for filename in os.listdir(image_dir):
-        f = os.path.join(image_dir, filename)
-        if os.path.isfile(f):
-            if f in open(file_name).read():
-                print('file exits in last')
-            else:
-                #bot = telegram.Bot(token=tg_token)
-                #bot.sendPhoto(chat_id=tg_chat_id, photo=open(f, 'rb'))
-                last.write(f + '\n')
-                count = count + 1
-                if count == 1:
-                   print('count limit reached')
-                   break
-
-    last.close()
-             
-                 
+  vk_token = ''
+  owner_id = ''
+  argv = sys.argv[1:]
+ 
+  try:
+      opts, args = getopt.getopt(argv, "t:o:")
+  except:
+      print("Error")
+  for opt, arg in opts:
+      if opt in ['-t']:
+          vk_token = arg
+      elif opt in ['-o']:
+          owner_id = arg
+  
+  vk_session = vk_api.VkApi(token = vk_token)
+  tools = vk_api.VkTools(vk_session)
+  wall = tools.get_all('wall.get', 100, {'owner_id': owner_id})
+  wall_items = wall['items']
+  image_dir = str(owner_id).lstrip('-')
+  isExist = os.path.exists(image_dir)
+  if not isExist:
+    os.makedirs(image_dir)
+  for item in wall_items:
+     if 'attachments' in item:
+        attachments = item['attachments'][0]
+        if 'photo' in attachments:
+            photo = attachments['photo']['sizes']
+            for size in photo:
+                if size['type'] == 'w':
+                    url = size['url']
+                    filename = image_dir + "/" + str(attachments['photo']['id']) + ".jpg"
+                    if os.path.isfile(filename):
+                      print("File exits with name " + filename)
+                    else:
+                      urllib.request.urlretrieve(url, filename)
+                    
+              
+          
+       
 if __name__ == '__main__':
     main()
