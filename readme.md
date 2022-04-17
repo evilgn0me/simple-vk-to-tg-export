@@ -9,10 +9,9 @@ python3 -m pip install -r requirements.txt
 ```
 
 This telegram export contains from two files.
-```
-downloader.py - downloads all photos it can find from vk wall by owner id, it will create directory with owner_id as directory name.
-uploader.py - checks for files in owner_id directory and uploads them to telegram channel.
-```
+**downloader.py** - downloads all photos it can find from vk wall by owner id, it will create directory with owner_id as directory name.
+**uploader.py** - checks for files in owner_id directory and uploads them to telegram channel. Upload limit is hardcoded to 1 photo per run right now.
+
 
 Usage
 ====
