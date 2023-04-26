@@ -4,6 +4,7 @@
 import json
 import vk_api
 import sys
+import os.path
 import getopt
 import youtube_dl
 
@@ -35,8 +36,12 @@ def main():
             if 'player' in video:
                 player_url = video['player']
                 print(f"Player URL: {player_url}")
+                video_file_name = f"{videos_dir}-videos/{video['title']}.mp4"
+                if os.path.exists(video_file_name):
+                    print(f"Video already downloaded: {video_file_name}")
+                    continue
                 ydl_opts = {
-                    'outtmpl': f"{videos_dir}-videos/{video['title']}.mp4",
+                    'outtmpl': video_file_name,
                 }
                 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                     ydl.download([player_url])
