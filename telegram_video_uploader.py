@@ -5,6 +5,7 @@ import telegram
 import os
 import sys
 import getopt
+import asyncio
 
 
 async def main():
@@ -49,5 +50,4 @@ async def main():
 
 
 if __name__ == '__main__':
-    import asyncio
     asyncio.run(main())
