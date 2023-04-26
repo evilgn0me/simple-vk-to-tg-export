@@ -3,10 +3,8 @@
 
 import json
 import vk_api
-import urllib.request
-import os.path
-import sys, getopt
-import re
+import sys
+import getopt
 import youtube_dl
 
 def main():
@@ -14,6 +12,7 @@ def main():
     group_id = ''
     argv = sys.argv[1:]
   
+    opts = []
     try:
         opts, args = getopt.getopt(argv, "t:g:")
     except:

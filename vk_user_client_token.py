@@ -12,6 +12,7 @@ def main():
     app_secret_key = ""
     argv = sys.argv[1:]
 
+    opts = []
     try:
         opts, args = getopt.getopt(argv, "c:k:")
     except:

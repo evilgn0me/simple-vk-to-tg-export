@@ -11,6 +11,7 @@ def main():
   owner_id = ''
   argv = sys.argv[1:]
  
+  opts = []
   try:
       opts, args = getopt.getopt(argv, "t:o:")
   except:
