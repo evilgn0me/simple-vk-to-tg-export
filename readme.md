@@ -16,4 +16,6 @@ python3 -m pip install -r requirements.txt
 
 **vk_album_reposter.py** - will check photos in group albums that are less than 5 like on them and repost them on group wall. Requires user_client_token
 
+**vk_video_downloader.py** - will do same as vk_photo_downloader, but will download videos instead. You need to install [youtube-dl](https://github.com/ytdl-org/youtube-dl#installation) for this script to work.
+
 Each script receives credentials command line arguments. 
