@@ -38,8 +38,8 @@ async def main():
                 print('file exits in last')
             else:
                 bot = telegram.Bot(token=tg_token)
-                await bot.sendPhoto(chat_id=tg_chat_id, photo=open(f, 'rb'))
                 last.write(f + '\n')
+                await bot.sendPhoto(chat_id=tg_chat_id, photo=open(f, 'rb'))
                 count = count + 1
                 if count == 1:
                    print('count limit reached')

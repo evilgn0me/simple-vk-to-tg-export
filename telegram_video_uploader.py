@@ -39,8 +39,8 @@ async def main():
             else:
                 print('trying to upload ' + f)
                 bot = telegram.Bot(token=tg_token)
-                await bot.send_video(chat_id=tg_chat_id, video=open(f, 'rb'), supports_streaming=True)
                 last.write(f + '\n')
+                await bot.send_video(chat_id=tg_chat_id, video=open(f, 'rb'), supports_streaming=True)
                 count = count + 1
                 if count == 1:
                     print('count limit reached')
