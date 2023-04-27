@@ -24,7 +24,7 @@ def main():
             app_secret_key = arg
 
     # The permissions your application needs
-    scope = "wall"
+    scope = "wall,video"
 
     # The URL to redirect the user to after they grant permission
     redirect_uri = "https://oauth.vk.com/blank.html"

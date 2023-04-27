@@ -3,10 +3,12 @@
 import json
 import telegram
 import os
-import sys, getopt
+import sys
+import getopt
+import asyncio
 
 
-def main():
+async def main():
     tg_token = ''
     tg_chat_id = ''
     owner_id = ''
@@ -36,7 +38,7 @@ def main():
                 print('file exits in last')
             else:
                 bot = telegram.Bot(token=tg_token)
-                bot.sendPhoto(chat_id=tg_chat_id, photo=open(f, 'rb'))
+                await bot.sendPhoto(chat_id=tg_chat_id, photo=open(f, 'rb'))
                 last.write(f + '\n')
                 count = count + 1
                 if count == 1:
@@ -47,4 +49,4 @@ def main():
              
                  
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
